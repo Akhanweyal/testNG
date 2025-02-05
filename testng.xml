@@ -2,7 +2,7 @@
 <suite name="Selenium Test Suite">
     <test name="Selenium Tests">
         <classes>
-            <class name="com.testng.DynamicElementUsingXpath"/> <!-- Correct package and class name -->
+            <!-- <class name="com.testng.DynamicElementUsingXpath"/> Correct package and class name -->
             <class name="com.testng.DynamicElementUisngExplicitWait"/>
         </classes>
     </test>

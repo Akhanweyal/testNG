@@ -44,6 +44,17 @@ public class DynamicElementUisngExplicitWait {
     searchFieled.sendKeys("ajmal");
    }
 
+   @Test
+   public void retrieveSearchHistory(){
+    List <WebElement> searchHistory = driver.findElements(By.xpath("//div[@class="OBMEnb"]//li"));
+    for(WebElement history : searchHistory){
+        System.out.println(history.getText());
+        // i want to get print first middle and last element text from the search history
+        if(history.getText().equals(searchHistory.get(0).getText()) || history.getText().equals(searchHistory.get(searchHistory.size()/2).getText()) || history.getText().equals(searchHistory.get(searchHistory.size()-1).getText())){
+            System.out.println(history.getText());
+    }
+   }
+
     @AfterMethod
     public void tearDown() {
         if (driver != null) {
