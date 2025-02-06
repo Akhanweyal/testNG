@@ -10,6 +10,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import java.util.List;
+
 public class DynamicElementUisngExplicitWait {
     WebDriver driver;
 
@@ -38,22 +40,35 @@ public class DynamicElementUisngExplicitWait {
   }     
    
    @Test
-   public void ValidateSearchField (){
-    WebElement searchFieled =driver.findElement(By.id("APjFqb"));
-    searchFieled.click();
-    searchFieled.sendKeys("ajmal");
+   public void ValidateSearchField() {
+    WebElement searchField = driver.findElement(By.id("APjFqb"));
+    searchField.click();
+    searchField.sendKeys("ajmal");
+      driver.findElement(By.name("btnK")).click();
+      try {
+        Thread.sleep(5000); 
+   } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
    }
 
    @Test
-   public void retrieveSearchHistory(){
-    List <WebElement> searchHistory = driver.findElements(By.xpath("//div[@class="OBMEnb"]//li"));
-    for(WebElement history : searchHistory){
-        System.out.println(history.getText());
-        // i want to get print first middle and last element text from the search history
-        if(history.getText().equals(searchHistory.get(0).getText()) || history.getText().equals(searchHistory.get(searchHistory.size()/2).getText()) || history.getText().equals(searchHistory.get(searchHistory.size()-1).getText())){
-            System.out.println(history.getText());
+   public void retrieveSearchHistory() {
+     WebElement searchField = driver.findElement(By.id("APjFqb"));
+     searchField.click();
+    List<WebElement> searchHistory = driver.findElements(By.xpath("//div[@class='OBMEnb']//li"));
+    for (WebElement history : searchHistory) {
+        System.out.println("search history list: "+ history.getText());
+        try {
+            Thread.sleep(500); // 1 second delay between each print
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
-   }
+    System.out.println("the first element in the search history list is: "+ searchHistory.get(0).getText());
+    System.out.println("the meddle element in the search history list is: " + searchHistory.get(searchHistory.size()/2).getText());
+    System.out.println("the last element in the search history list is: " + searchHistory.get(searchHistory.size()-1).getText());
+} 
 
     @AfterMethod
     public void tearDown() {
