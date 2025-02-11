@@ -1,9 +1,17 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Selenium Test Suite">
+    <listeners>
+        <listener class-name="org.testng.reporters.EmailableReporter"/>
+        <listener class-name="org.testng.reporters.TestHTMLReporter"/>
+    </listeners>
     <test name="Selenium Tests">
         <classes>
-            <!-- <class name="com.testng.DynamicElementUsingXpath"/> Correct package and class name -->
-            <class name="com.testng.DynamicElementUisngExplicitWait"/>
+            <!-- <class name="com.testng.DynamicElementUisngExplicitWait"/> -->
+            <class name="com.testng.DatabaseTests"/> 
         </classes>
     </test>
+    <properties>
+        <property name="headless" value="true"/>
+    </properties>
 </suite>
+
