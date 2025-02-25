@@ -6,7 +6,7 @@
     </listeners>
     <test name="Selenium Tests">
         <classes>
-            <!-- <class name="com.testng.DynamicElementUisngExplicitWait"/> -->
+            <class name="com.testng.DynamicElementUsingXpath"/>
             <class name="com.testng.DatabaseTests"/> 
         </classes>
     </test>
