@@ -1,12 +1,13 @@
 package utilities;
-import java.io.FileInputStream;
-import java.io.IOException;
+
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
+
 public class db {
     private static String URL;
     private static String USERNAME;
@@ -27,7 +28,10 @@ public class db {
             System.out.println("Credentials picked from environment variables");
         } else {
             // If environment variables are not set, fall back to the config.properties file
-            try (FileInputStream input = new FileInputStream("config.properties")) {
+            try (InputStream input = db.class.getClassLoader().getResourceAsStream("config.properties")) {
+                if (input == null) {
+                    throw new RuntimeException("config.properties file not found in the classpath!");
+                }
                 Properties properties = new Properties();
                 properties.load(input);
                 URL = properties.getProperty("db.url");
@@ -37,8 +41,9 @@ public class db {
                 System.out.println("db-url: " + URL);
                 System.out.println("db_USERNAME: " + USERNAME);
                 System.out.println("db_PASSWORD: " + PASSWORD);
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
+                throw new RuntimeException("Failed to load config.properties file", e);
             }
         }
 
@@ -82,7 +87,7 @@ public class db {
         }
     }
 
-    // Method to retrieve credentials from the database should be static to be called from other classes or methods
+    // Method to retrieve credentials from the database
     public static String[] getCredentials() {
         String query = "SELECT username, password FROM users LIMIT 1";
         try (Connection connection = getConnection();
