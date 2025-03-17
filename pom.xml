@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project
   xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
->
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.testng</groupId>
   <artifactId>test</artifactId>
@@ -17,6 +16,8 @@
     <selenium.version>4.10.0</selenium.version>
     <testng.version>7.4.0</testng.version>
     <webdrivermanager.version>5.4.1</webdrivermanager.version>
+    <slf4j.version>1.7.32</slf4j.version>
+    <logback.version>1.2.11</logback.version>
   </properties>
   <dependencies>
     <!-- Selenium -->
@@ -38,12 +39,17 @@
         <version>${testng.version}</version>
         <scope>test</scope>
     </dependency>
-    <!-- SLF4J -->
+    <!-- SLF4J API -->
     <dependency>
         <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-simple</artifactId>
-        <version>1.7.32</version>
-        <scope>test</scope>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+    </dependency>
+    <!-- Logback Classic -->
+    <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${logback.version}</version>
     </dependency>
     <!-- MySQL Connector -->
     <dependency>
